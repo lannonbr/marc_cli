@@ -1,5 +1,10 @@
 extern crate rustyline;
 
+mod parse;
+mod loader;
+
+use parse::parse_command;
+
 use rustyline::error::ReadlineError;
 use rustyline::Editor;
 
@@ -13,7 +18,7 @@ fn main() {
         match readline {
             Ok(line) => {
                 rl.add_history_entry(&line);
-                println!("Line: {}", line);
+                parse_command(&line);
             },
             Err(ReadlineError::Interrupted) => {
                 println!("CTRL-C");
