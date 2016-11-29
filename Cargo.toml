@@ -6,3 +6,4 @@ authors = ["Benjamin Lannon <lannonbr@clarkson.edu>"]
 [dependencies]
 marc="*"
 regex="*"
+rustyline="1.0.0"

@@ -1,3 +1,33 @@
+extern crate rustyline;
+
+use rustyline::error::ReadlineError;
+use rustyline::Editor;
+
 fn main() {
-    println!("Hello, world!");
+    let mut rl = Editor::<()>::new();
+    if let Err(_) = rl.load_history(".marc_cli_history.txt") {
+        println!("No previous history found.");
+    }
+    loop {
+        let readline = rl.readline("MARC>> ");
+        match readline {
+            Ok(line) => {
+                rl.add_history_entry(&line);
+                println!("Line: {}", line);
+            },
+            Err(ReadlineError::Interrupted) => {
+                println!("CTRL-C");
+                break
+            },
+            Err(ReadlineError::Eof) => {
+                println!("CTRL-D");
+                break
+            },
+            Err(err) => {
+                println!("Error: {:?}", err);
+                break
+            }
+        }
+    }
+    rl.save_history(".marc_cli_history.txt").unwrap();
 }
