@@ -21,11 +21,11 @@ fn main() {
                 parse_command(&line);
             },
             Err(ReadlineError::Interrupted) => {
-                println!("CTRL-C");
+                println!("CTRL-C. Quitting...");
                 break
             },
             Err(ReadlineError::Eof) => {
-                println!("CTRL-D");
+                println!("CTRL-D. Quitting...");
                 break
             },
             Err(err) => {
