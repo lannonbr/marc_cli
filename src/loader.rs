@@ -8,11 +8,13 @@ use std::error::Error;
 const RECORD_TERMINATOR: u8 = 0x1D;
 
 // Load marc records from a file into a vector.
-pub fn load_records(filename: &str) -> Vec<marc::Record> {
+pub fn load_records(filename: &String) -> Vec<marc::Record<'static>> {
     let mut result_vector: Vec<marc::Record> = Vec::new();
     let mut buffer = Vec::new();
 
-    let path = Path::new(filename);
+    let file_path = filename.clone();
+
+    let path = Path::new(file_path.as_str());
     let display = path.display();
 
     let file = match File::open(&path) {
