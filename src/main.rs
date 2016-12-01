@@ -3,6 +3,7 @@ extern crate marc;
 
 mod parse;
 mod loader;
+mod query;
 
 use parse::parse_command;
 
